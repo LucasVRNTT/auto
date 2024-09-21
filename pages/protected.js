@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 const authMsg = "";
+
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
@@ -17,19 +18,19 @@ export default function ProtectedPage() {
           }
         });
         const data = await res.json();
-        const authMsg = data.message;
         if (data.authenticated) {
           setAuthorized(true);
         } else {
           router.push('/index'); // Redirection vers la page de login si non authentifié
         }
+        return data.message
       } catch (error) {
         console.error("Erreur d'authentification", error);
         router.push('/index');
       }
     };
     
-    checkAuth();
+    authMsg = checkAuth();
   }, []);
 
   if (!authorized) {

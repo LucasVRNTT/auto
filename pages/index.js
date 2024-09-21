@@ -3,17 +3,14 @@ import { useState } from 'react';
 const authMsg = "";
 
 const getAuthMessage = async () => {
-  try {
-    const res = await fetch('/api/check-auth', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const authMsg = await res.json().message;
-    return authMsg
-  }
-  catch (err) {}
+  const res = await fetch('/api/check-auth', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const authMsg = await res.json().message;
+  return authMsg
 }
 
 export default function Home() {
