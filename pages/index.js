@@ -16,7 +16,7 @@ const getAuthMessage = async () => {
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [response, setResponse] = useState('');
-  const authMsg = getAuthMessage();
+  authMsg = getAuthMessage();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
