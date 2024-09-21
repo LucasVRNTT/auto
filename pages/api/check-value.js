@@ -2,6 +2,8 @@
 import fs from 'fs';
 import path from 'path';
 import CryptoJS from 'crypto-js';
+import jwt from 'jsonwebtoken';
+import { serialize } from 'cookie';
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
@@ -13,6 +15,14 @@ export default function handler(req, res) {
     const hashedValue = CryptoJS.SHA256(value).toString(CryptoJS.enc.Hex);
     // Comparer l'entrée utilisateur avec la valeur stockée
     if (hashedValue === storedValue) {
+      const token = jwt.sign({ user: 'authenticated' }, hashedValue, { expiresIn: '1d' });
+      res.setHeader('Set-Cookie', serialize('auth', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24, // 1 jour
+        sameSite: 'strict',
+        path: '/'
+      }));
       res.status(200).json({ message: 'Valeur correcte !'+hashedValue});
     } else {
       res.status(200).json({ message: 'Valeur incorrecte.'+hashedValue});

@@ -1,5 +1,7 @@
 // pages/index.js
 import { useState } from 'react';
+import jwt from 'jsonwebtoken';
+import { serialize } from 'cookie';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
