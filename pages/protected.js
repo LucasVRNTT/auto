@@ -1,10 +1,10 @@
 // pages/protected.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-authMsg = "";
 
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
+  const [authMsg, checkAuth] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function ProtectedPage() {
       }
     };
     
-    authMsg = checkAuth();
+    checkAuth();
   }, []);
 
   if (!authorized) {
