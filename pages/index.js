@@ -1,12 +1,25 @@
 // pages/index.js
 import { useState } from 'react';
-import jwt from 'jsonwebtoken';
-import { serialize } from 'cookie';
+const authMsg = "";
+
+const getAuthMessage = async () => {
+  try {
+    const res = await fetch('/api/check-auth', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const authMsg = await res.json().message;
+    return authMsg
+  }
+  catch (err) {}
+}
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [response, setResponse] = useState('');
-
+  const authMsg = getAuthMessage();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,6 +49,7 @@ export default function Home() {
         <button type="submit">Vérifier</button>
       </form>
       {response && <p>Résultat: {response}</p>}
+      {authMsg && <p>authMsg: {authMsg}</p>}
     </div>
   );
 }

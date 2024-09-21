@@ -1,7 +1,7 @@
 // pages/protected.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
+const authMsg = "";
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
@@ -17,14 +17,15 @@ export default function ProtectedPage() {
           }
         });
         const data = await res.json();
+        const authMsg = data.message;
         if (data.authenticated) {
           setAuthorized(true);
         } else {
-          router.push('/login'); // Redirection vers la page de login si non authentifié
+          router.push('/index'); // Redirection vers la page de login si non authentifié
         }
       } catch (error) {
         console.error("Erreur d'authentification", error);
-        router.push('/login');
+        router.push('/index');
       }
     };
     
@@ -39,6 +40,7 @@ export default function ProtectedPage() {
     <div>
       <h1>Page Protégée</h1>
       <p>Vous avez accès à cette page car vous êtes authentifié.</p>
+      {authMsg && <p>authMsg: {authMsg}</p>}
     </div>
   );
 }

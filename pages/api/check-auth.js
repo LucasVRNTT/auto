@@ -11,8 +11,8 @@ export default function handler(req, res) {
 
   try {
     jwt.verify(auth, storedValue);
-    return res.status(200).json({ authenticated: true });
+    return res.status(200).json({ authenticated: true, message: auth+"=="+storedValue });
   } catch (err) {
-    return res.status(401).json({ authenticated: false });
+    return res.status(401).json({ authenticated: false, message: auth+"!="+storedValue  });
   }
 }
