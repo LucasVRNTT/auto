@@ -6,7 +6,7 @@ export default function handler(req, res) {
   const { auth } = parse(req.headers.cookie || '');
 
   if (!auth) {
-    return res.status(401).json({ authenticated: false });
+    return res.status(401).json({ authenticated: false, message: auth+" pas de cookie! ->"+storedValue });
   }
 
   try {

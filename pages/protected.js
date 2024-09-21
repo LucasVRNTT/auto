@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
-  const [authMsg, checkAuth] = useState('');
+  const [authMsg, setAuthMsg] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -18,18 +18,17 @@ export default function ProtectedPage() {
           }
         });
         const data = await res.json();
+        setAuthMsg(data.message);
         if (data.authenticated) {
           setAuthorized(true);
         } else {
           router.push('/index'); // Redirection vers la page de login si non authentifié
         }
-        return data.message
       } catch (error) {
         console.error("Erreur d'authentification", error);
         router.push('/index');
       }
     };
-    
     checkAuth();
   }, []);
 
