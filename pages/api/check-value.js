@@ -9,9 +9,9 @@ export default function handler(req, res) {
     // Lire le fichier du serveur contenant la valeur de comparaison
     const filePath = path.resolve(process.cwd(), 'data/secret-value.txt');
     const storedValue = fs.readFileSync(filePath, 'utf-8').trim();
-
+    const hash = CryptoJS.SHA256(value).toString();
     // Comparer l'entrée utilisateur avec la valeur stockée
-    if (value === storedValue) {
+    if (hash === storedValue) {
       res.status(200).json({ message: 'Valeur correcte !' });
     } else {
       res.status(200).json({ message: 'Valeur incorrecte.' });
