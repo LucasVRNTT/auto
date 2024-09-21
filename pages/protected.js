@@ -1,7 +1,7 @@
 // pages/protected.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-const authMsg = "";
+authMsg = "";
 
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);

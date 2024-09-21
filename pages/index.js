@@ -1,6 +1,6 @@
 // pages/index.js
 import { useState } from 'react';
-const authMsg = "";
+authMsg = "";
 
 const getAuthMessage = async () => {
   const res = await fetch('/api/check-auth', {
