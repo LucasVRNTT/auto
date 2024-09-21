@@ -1,22 +1,26 @@
-// pages/index.js
-import { useState } from 'react';
-authMsg = "";
-
-const getAuthMessage = async () => {
-  const res = await fetch('/api/check-auth', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  const authMsg = await res.json().message;
-  return authMsg
-}
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [response, setResponse] = useState('');
-  const authMsg = getAuthMessage();
+  const [authMsg, setAuthMsg] = useState('');
+
+  // Utilisez useEffect pour appeler la fonction asynchrone au montage du composant
+  useEffect(() => {
+    const fetchAuthMessage = async () => {
+      const res = await fetch('/api/check-auth', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await res.json();
+      setAuthMsg(data.message); // Mettez à jour l'état avec le message d'authentification
+    };
+
+    fetchAuthMessage();
+  }, []); // Le tableau vide [] signifie que l'effet s'exécute seulement au montage
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
