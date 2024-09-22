@@ -32,7 +32,7 @@ export default function ProtectedPage() {
 
         if (data.authenticated) {
           setAuthorized(true);
-          const resContent = await fetch('board.html'); // Remplacez par l'URL correcte
+          const resContent = await fetch('/board.html'); // Remplacez par l'URL correcte
           const textContent = await resContent.text();
           setContent(textContent);
         } else {
