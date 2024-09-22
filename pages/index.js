@@ -24,7 +24,6 @@ export default function Home() {
         }
       } catch (error) {
         console.error("Erreur d'authentification", error);
-        router.push('/index');
       }
     };
     checkAuth();
@@ -46,9 +45,6 @@ export default function Home() {
 
     const data = await res.json();
     setResponse(data.message);
-    if (data.message.includes("protected")){
-      router.push('/protected');
-    }
   };
 
   return (
@@ -63,7 +59,7 @@ export default function Home() {
           placeholder="Entrez une valeur"
           maxlength="20"
         />
-        <button type="submit">Vérifier</button>
+        <button type="submit">Valider</button>
       </form>
       {response && (
         <p>
