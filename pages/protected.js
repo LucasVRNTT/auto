@@ -5,8 +5,10 @@ import { useRouter } from 'next/router';
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true); // Mettre à jour l'état indiquant que le composant est monté côté client
     // Fonction pour vérifier l'authentification
     const checkAuth = async () => {
       try {
@@ -37,11 +39,13 @@ export default function ProtectedPage() {
     return <p>Vérification de l'authentification...</p>;
   }
 
-  fetch("board.html")
-    .then(response => response.text())
-    .then(data => {
-      // Afficher le contenu HTML dans un élément spécifique
-      document.getElementById('content').innerHTML = data;
-    })
-    .catch(error => console.error('Erreur lors de l\'importation du HTML:', error));
+  if (isClient) {
+    fetch("board.html")
+      .then(response => response.text())
+      .then(data => {
+        // Afficher le contenu HTML dans un élément spécifique
+        document.getElementById('content').innerHTML = data;
+      })
+      .catch(error => console.error('Erreur lors de l\'importation du HTML:', error));
+    }
 }
