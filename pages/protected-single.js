@@ -1,25 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-const Home = ({ content }) => {
-  codeHtml = 
-   (
+const MonComposant = ({ content }) => {
+  return (
       <div>
           <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
   );
+};
+
+const Home = ({ content }) => {
+  codeHtml = MonComposant(content);
   
-  console.log("ba")
+  console.log("ba");
   hashe = window.location.hash;
 	sectionToEdit = codeHtml.getElementById("titreComposant");
   if (hashe) {
-    sectionToEdit.innerText = hashe
+    sectionToEdit.innerText = hashe;
   }
   else {
-    sectionToEdit.innerText = "Nothing"
+    sectionToEdit.innerText = "Nothing";
   }
-  console.log(hash)
-  console.log(sectionToEdit)
+  console.log(hash);
+  console.log(sectionToEdit);
   return codeHtml;
 };
 
@@ -64,7 +67,7 @@ export default function ProtectedPage() {
   if (!authorized) {
     return <p>Vérification de l'authentification...</p>;
   }
-  console.log("nike")
+  console.log("nike");
 
   if (isClient && authorized) {
     return <Home content={content} />;
