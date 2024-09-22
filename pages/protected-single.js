@@ -50,10 +50,12 @@ export default function ProtectedPage() {
   if (!authorized) {
     return <p>Vérification de l'authentification...</p>;
   }
+  console.log("nike")
 
   if (isClient && authorized) {
     return <Home content={content} />;
   }
+  console.log("ba")
   hashe = window.location.hash;
 	sectionToEdit = document.getElementById("titreComposant");
   if (hashe) {
