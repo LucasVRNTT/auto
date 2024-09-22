@@ -2,6 +2,15 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+const Home = ({ content }) => {
+  return (
+      <div>
+          <h1>Bienvenue sur ma page</h1>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
+  );
+};
+
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
@@ -31,6 +40,7 @@ export default function ProtectedPage() {
         router.push('/index');
       }
     };
+    Home();
     checkAuth();
   }, []);
 
@@ -40,15 +50,13 @@ export default function ProtectedPage() {
   }
 
   if (isClient && authorized) {
-    fetch('/api/load-html')
-      .then((res) => res.text())
-      .then((data) => setHtmlContent(data))
-      .catch((err) => console.error('Erreur:', err));
-    return (
-      <div>
-        <h1>Contenu HTML Importé</h1>
-        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-      </div>
-    );
+    const res = fetch('board.html'); // Remplace par l'URL correcte
+    const content = res.text();
+
+    return {
+        props: {
+            content,
+        },
+    };
   }
 }
