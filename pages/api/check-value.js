@@ -23,9 +23,9 @@ export default function handler(req, res) {
         sameSite: 'strict',
         path: '/'
       }));
-      res.status(200).json({ message: 'Valeur correcte ! <a href="protected">Accéder à l\'interface</a>'});
+      res.status(200).json({ message: 'Redirection vers /protected...'});
     } else {
-      res.status(200).json({ message: 'Valeur incorrecte.'});
+      res.status(200).json({ message: 'Erreur d\'authentification !'});
     }
   } else {
     res.status(405).json({ message: 'Méthode non autorisée.' });

@@ -40,7 +40,7 @@ export default function ProtectedPage() {
         }
       } catch (error) {
         console.error("Erreur d'authentification", error);
-        // router.push('/index');
+        router.push('/index');
       }
     };
 
