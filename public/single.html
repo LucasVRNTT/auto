@@ -129,12 +129,8 @@
 				}
 			}
 	
-			// Appelle la fonction au chargement de la page
-			document.addEventListener('DOMContentLoaded', showSection);
-			window.onload = editSection;
-	
-			// Appelle la fonction chaque fois que le hash change
-			window.onhashchange = editSection;
+			window.addEventListener('load', showSection); // Au chargement de la page
+			window.addEventListener('hashchange', showSection); // Lorsque le hash change
 		</script>
 	</body>
 </html>
