@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [response, setResponse] = useState('');
+  const router = useRouter();
 
   // Utilisez useEffect pour appeler la fonction asynchrone au montage du composant
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function Home() {
       </form>
       {response && (
         <p>
-          Résultat: {response}
+          {response}
           </p>
           )}
     </div>
