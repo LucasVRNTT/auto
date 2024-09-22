@@ -54,6 +54,13 @@ export default function ProtectedPage() {
   if (isClient && authorized) {
     return <Home content={content} />;
   }
-
+  hashe = window.location.hash;
+	sectionToEdit = document.getElementById("titreComposant");
+  if (hashe) {
+    sectionToEdit.innerText = hashe
+  }
+  else {
+    sectionToEdit.innerText = "Nothing"
+  }
   return null; // En attendant le rendu final
 }

@@ -105,32 +105,13 @@
 				<section id="footer">
 					<p class="copyright">Lucas Vernotte 2024</p>
 				</section>
-
 		</div>
 
 		<!-- Scripts -->
-		<!-- <script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/browser.min.js"></script>
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script> -->
-		<script>
-			function editSection() {
-				// Récupère la valeur après le #
-				console.log('editSection appelée !'); // Debugging log
-				hashe = window.location.hash;
-				const sectionToEdit = document.getElementById("titreComposant");
-				// Si un hash existe, affiche la section correspondante
-				if (hashe) {
-					sectionToEdit.innerText = hashe
-				}
-				else {
-					sectionToEdit.innerText = "Nothing"
-				}
-			}
-	
-			window.addEventListener('load', showSection); // Au chargement de la page
-			window.addEventListener('hashchange', showSection); // Lorsque le hash change
-		</script>
+		<script src="assets/js/main.js"></script>
 	</body>
 </html>
