@@ -1,7 +1,11 @@
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
 import { parse } from 'cookie';
+
 const filePath = path.resolve(process.cwd(), 'data/secret-value.txt');
 const storedValue = fs.readFileSync(filePath, 'utf-8').trim();
+
 export default function handler(req, res) {
   const { auth } = parse(req.headers.cookie || '');
 

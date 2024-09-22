@@ -22,6 +22,7 @@ export default function ProtectedPage() {
         if (data.authenticated) {
           setAuthorized(true);
         } else {
+          console.error("Mauvais identifiant");
           router.push('/index'); // Redirection vers la page de login si non authentifié
         }
       } catch (error) {
