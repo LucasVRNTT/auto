@@ -3,27 +3,27 @@ import { useRouter } from 'next/router';
 
 const MonComposant = ({ content }) => {
   return (
-      <div>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
   );
 };
 
 const Home = ({ content }) => {
-  codeHtml = MonComposant(content);
-  
-  console.log("ba");
-  hashe = window.location.hash;
-	sectionToEdit = codeHtml.getElementById("titreComposant");
-  if (hashe) {
-    sectionToEdit.innerText = hashe;
-  }
-  else {
-    sectionToEdit.innerText = "Nothing";
-  }
-  console.log(hash);
-  console.log(sectionToEdit);
-  return codeHtml;
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+      const hashe = window.location.hash;
+      const sectionToEdit = sectionRef.current;
+
+      if (sectionToEdit) {
+          sectionToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' de l'ID
+      }
+  }, []); // Exécute l'effet une seule fois après le premier rendu
+
+  return (
+      <div ref={sectionRef}>
+          <MonComposant content={content} />
+      </div>
+  );
 };
 
 export default function ProtectedPage() {
