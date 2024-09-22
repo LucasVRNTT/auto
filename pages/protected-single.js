@@ -2,11 +2,25 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 const Home = ({ content }) => {
-  return (
+  codeHtml = 
+   (
       <div>
           <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
   );
+  
+  console.log("ba")
+  hashe = window.location.hash;
+	sectionToEdit = codeHtml.getElementById("titreComposant");
+  if (hashe) {
+    sectionToEdit.innerText = hashe
+  }
+  else {
+    sectionToEdit.innerText = "Nothing"
+  }
+  console.log(hash)
+  console.log(sectionToEdit)
+  return codeHtml;
 };
 
 export default function ProtectedPage() {
@@ -55,16 +69,5 @@ export default function ProtectedPage() {
   if (isClient && authorized) {
     return <Home content={content} />;
   }
-  console.log("ba")
-  hashe = window.location.hash;
-	sectionToEdit = document.getElementById("titreComposant");
-  if (hashe) {
-    sectionToEdit.innerText = hashe
-  }
-  else {
-    sectionToEdit.innerText = "Nothing"
-  }
-  console.log(hash)
-  console.log(sectionToEdit)
   return null; // En attendant le rendu final
 }
