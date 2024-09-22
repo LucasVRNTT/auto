@@ -4,11 +4,33 @@ import { useRouter } from 'next/router';
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [response, setResponse] = useState('');
+  const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
 
   // Utilisez useEffect pour appeler la fonction asynchrone au montage du composant
   useEffect(() => {
   }, []); // Le tableau vide [] signifie que l'effet s'exécute seulement au montage
+  const checkAuth = async () => {
+    try {
+      const res = await fetch('/api/check-auth', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await res.json();
+      if (data.authenticated) {
+        setAuthorized(true);
+        }
+      } catch (error) {
+        console.error("Erreur d'authentification", error);
+        router.push('/index');
+      }
+    };
+    checkAuth();
+    if (authorized){
+      router.push('/protected');
+    }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
