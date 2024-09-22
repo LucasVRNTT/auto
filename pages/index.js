@@ -51,7 +51,11 @@ export default function Home() {
         />
         <button type="submit">Vérifier</button>
       </form>
-      {response && <p>Résultat: {response}</p>}
+      {response && (
+        <p>
+          Résultat: {response}
+          </p>
+          )}
     </div>
   );
 }

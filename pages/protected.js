@@ -40,12 +40,15 @@ export default function ProtectedPage() {
   }
 
   if (isClient && authorized) {
-    fetch("board.html")
-      .then(response => response.text())
-      .then(data => {
-        // Afficher le contenu HTML dans un élément spécifique
-        document.getElementById('content').innerHTML = data;
-      })
-      .catch(error => console.error('Erreur lors de l\'importation du HTML:', error));
-    }
+    fetch('/api/load-html')
+      .then((res) => res.text())
+      .then((data) => setHtmlContent(data))
+      .catch((err) => console.error('Erreur:', err));
+    return (
+      <div>
+        <h1>Contenu HTML Importé</h1>
+        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      </div>
+    );
+  }
 }
