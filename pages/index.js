@@ -49,8 +49,8 @@ export default function Home() {
         />
         <button type="submit">Vérifier</button>
       </form>
-      {response && <p>Résultat: {response}</p>}
       {authMsg && <p>authMsg: {authMsg}</p>}
+      {response && <p>Résultat: {response}</p>}
     </div>
   );
 }

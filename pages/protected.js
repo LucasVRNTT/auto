@@ -33,8 +33,8 @@ export default function ProtectedPage() {
   }, []);
 
   if (!authorized) {
-    return authMsg && <p>authMsg: {authMsg}</p>;
-    // return <p>Vérification de l'authentification...</p> {authMsg && <p>authMsg: {authMsg}</p>};
+    // return authMsg && <p>authMsg: {authMsg}</p>;
+    return <p>Vérification de l'authentification...</p>;
   }
 
   return (
