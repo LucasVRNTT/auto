@@ -89,43 +89,11 @@
 				<!-- Main -->
 					<div id="main">
 						<!-- Post -->
-						<div id="Volets" class="section">
+						<div id="composant" class="section">
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2>Volets</h2>
-										<p>Dans quel état se trouvent-ils :</p>
-									</div>
-									<div class="meta">
-										<time class="published" datetime="2024-11-01">Date du jour</time>
-										<a href="#" class="author"><span class="name">Mochi</span><img src="images/avatar.jpg" alt="" /></a>
-									</div>
-								</header>
-								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-								<p>En résumé, tout va bien.</p>
-							</article>
-						</div>
-						<div id="Alarmes" class="section">
-							<article class="post">
-								<header>
-									<div class="title">
-										<h2>Alarmes</h2>
-										<p>Dans quel état se trouvent-ils :</p>
-									</div>
-									<div class="meta">
-										<time class="published" datetime="2024-11-01">Date du jour</time>
-										<a href="#" class="author"><span class="name">Mochi</span><img src="images/avatar.jpg" alt="" /></a>
-									</div>
-								</header>
-								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-								<p>En résumé, tout va bien.</p>
-							</article>
-						</div>
-						<div id="VMC" class="section">
-							<article class="post">
-								<header>
-									<div class="title">
-										<h2>VMC</h2>
+										<h2 id="titreComposant">Volets</h2>
 										<p>Dans quel état se trouvent-ils :</p>
 									</div>
 									<div class="meta">
@@ -159,29 +127,22 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-				function showSection() {
+				function editSection() {
 					// Récupère la valeur après le #
 					const hash = window.location.hash;
-		
-					// Cache toutes les sections
-					document.querySelectorAll('.section').forEach(section => {
-						section.style.display = 'none';
-					});
-		
+
 					// Si un hash existe, affiche la section correspondante
 					if (hash) {
-						const sectionToShow = document.querySelector(hash);
-						if (sectionToShow) {
-							sectionToShow.style.display = 'block';
-						}
+						const sectionToEdit = document.getElementById("titreComposant");
+						sectionToEdit.innerText = hash
 					}
 				}
 		
 				// Appelle la fonction au chargement de la page
-				window.onload = showSection;
+				window.onload = editSection;
 		
 				// Appelle la fonction chaque fois que le hash change
-				window.onhashchange = showSection;
+				window.onhashchange = editSection;
 			</script>
 	</body>
 </html>
