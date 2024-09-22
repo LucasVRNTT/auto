@@ -62,5 +62,7 @@ export default function ProtectedPage() {
   else {
     sectionToEdit.innerText = "Nothing"
   }
+  console.log(hash)
+  console.log(sectionToEdit)
   return null; // En attendant le rendu final
 }
