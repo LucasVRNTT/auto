@@ -15,17 +15,17 @@ export default function handler(req, res) {
     const hashedValue = CryptoJS.SHA256(value).toString(CryptoJS.enc.Hex);
     // Comparer l'entrée utilisateur avec la valeur stockée
     if (hashedValue === storedValue) {
-      const token = jwt.sign({ user: 'authenticated' }, hashedValue, { expiresIn: '1d' });
+      const token = jwt.sign({ user: 'authenticated' }, hashedValue, { expiresIn: '7d' });
       res.setHeader('Set-Cookie', serialize('auth', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 24, // 1 jour
+        maxAge: 60 * 60 * 24 * 7, // 7 jours
         sameSite: 'strict',
         path: '/'
       }));
-      res.status(200).json({ message: 'Valeur correcte !'+hashedValue});
+      res.status(200).json({ message: 'Valeur correcte ! <a href="protected">Accéder à l\'interface</a>'});
     } else {
-      res.status(200).json({ message: 'Valeur incorrecte.'+hashedValue});
+      res.status(200).json({ message: 'Valeur incorrecte.'});
     }
   } else {
     res.status(405).json({ message: 'Méthode non autorisée.' });

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
-  const [authMsg, setAuthMsg] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -18,7 +17,7 @@ export default function ProtectedPage() {
           }
         });
         const data = await res.json();
-        setAuthMsg(data.message);
+
         if (data.authenticated) {
           setAuthorized(true);
         } else {
@@ -38,11 +37,11 @@ export default function ProtectedPage() {
     return <p>Vérification de l'authentification...</p>;
   }
 
-  return (
-    <div>
-      <h1>Page Protégée</h1>
-      <p>Vous avez accès à cette page car vous êtes authentifié.</p>
-      {authMsg && <p>authMsg: {authMsg}</p>}
-    </div>
-  );
+  fetch("board.html")
+    .then(response => response.text())
+    .then(data => {
+      // Afficher le contenu HTML dans un élément spécifique
+      document.getElementById('content').innerHTML = data;
+    })
+    .catch(error => console.error('Erreur lors de l\'importation du HTML:', error));
 }

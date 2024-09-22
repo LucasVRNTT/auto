@@ -39,17 +39,18 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Vérifier la valeur</h1>
+      <h1>Accès restreint</h1>
       <form onSubmit={handleSubmit}>
+        <p>Entrez le mot de passe</p>
         <input
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Entrez une valeur"
+          maxlength="20"
         />
         <button type="submit">Vérifier</button>
       </form>
-      {authMsg && <p>authMsg: {authMsg}</p>}
       {response && <p>Résultat: {response}</p>}
     </div>
   );
