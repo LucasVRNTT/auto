@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 const Home = ({ content }) => {
   return (
       <div>
-          <h1>Bienvenue sur ma page</h1>
           <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
   );
