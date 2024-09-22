@@ -39,7 +39,7 @@ export default function ProtectedPage() {
     return <p>Vérification de l'authentification...</p>;
   }
 
-  if (isClient) {
+  if (isClient && authorized) {
     fetch("board.html")
       .then(response => response.text())
       .then(data => {
