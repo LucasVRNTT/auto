@@ -1,4 +1,3 @@
-// pages/protected.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -13,11 +12,13 @@ const Home = ({ content }) => {
 
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
+  const [content, setContent] = useState('');
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true); // Mettre à jour l'état indiquant que le composant est monté côté client
+
     // Fonction pour vérifier l'authentification
     const checkAuth = async () => {
       try {
@@ -31,6 +32,9 @@ export default function ProtectedPage() {
 
         if (data.authenticated) {
           setAuthorized(true);
+          const resContent = await fetch('board.html'); // Remplacez par l'URL correcte
+          const textContent = await resContent.text();
+          setContent(textContent);
         } else {
           console.error("Mauvais identifiant");
           router.push('/index'); // Redirection vers la page de login si non authentifié
@@ -40,23 +44,17 @@ export default function ProtectedPage() {
         router.push('/index');
       }
     };
-    Home();
+
     checkAuth();
   }, []);
 
   if (!authorized) {
-    // return authMsg && <p>authMsg: {authMsg}</p>;
     return <p>Vérification de l'authentification...</p>;
   }
 
   if (isClient && authorized) {
-    const res = fetch('board.html'); // Remplace par l'URL correcte
-    const content = res.text();
-
-    return {
-        props: {
-            content,
-        },
-    };
+    return <Home content={content} />;
   }
+
+  return null; // En attendant le rendu final
 }
