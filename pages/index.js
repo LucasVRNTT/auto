@@ -24,7 +24,7 @@ export default function Home() {
 
     const data = await res.json();
     setResponse(data.message);
-    if ("protected" in data.message){
+    if (data.message.includes("protected")){
       router.push('/protected');
     }
   };
