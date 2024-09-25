@@ -15,8 +15,10 @@ const Home = ({ content }) => {
       const titreToEdit = document.getElementById("titreComposant");
       const corpsToEdit = document.getElementById("corps");
       const sectionToAppendChild = document.getElementById("section");
-      const newInput = document.createElement('input');
+      const hourInput = document.createElement('input');
+      hourInput.id = "hourInput"
       const newImage = document.createElement('img');
+      newImage.id = "image"
       const imageSpan = document.getElementById("picture");
 
       if (titreToEdit) {
@@ -25,20 +27,19 @@ const Home = ({ content }) => {
           if (hashe === "#Volets") {
             corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets demain ?";
             
-            newInput.type = "time"
-            sectionToAppendChild.appendChild(newInput);
+            hourInput.type = "time"
+            sectionToAppendChild.appendChild(hourInput);
           }
           else {
-            sectionToAppendChild.appendChild(newInput);
-            sectionToAppendChild.removeChild(newInput);
+            // document.removeChild(hourInput);
+            hourInput.remove()
           }
           if (hashe === "#Aspiro"){
             newImage.src = "images/aspiro.jpg"
             imageSpan.appendChild(newImage)
           }
           else {
-            imageSpan.appendChild(newImage)
-            imageSpan.removeChild(newImage);
+            document.removeChild(newImage);
           }
       }
     };
