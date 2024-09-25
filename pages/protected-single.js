@@ -39,7 +39,7 @@ const Home = ({ content }) => {
             imageSpan.appendChild(newImage);
           }
           else {
-            document.removeChild(newImage);
+            newImage.remove();
           }
       }
     };
