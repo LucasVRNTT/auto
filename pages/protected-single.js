@@ -27,16 +27,16 @@ const Home = ({ content }) => {
           if (hashe === "#Volets") {
             corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets demain ?";
             
-            hourInput.type = "time"
+            hourInput.type = "time";
             sectionToAppendChild.appendChild(hourInput);
           }
           else {
             // document.removeChild(hourInput);
-            hourInput.remove()
+            hourInput.remove();
           }
           if (hashe === "#Aspiro"){
-            newImage.src = "images/aspiro.jpg"
-            imageSpan.appendChild(newImage)
+            newImage.src = "images/aspiro.jpg";
+            imageSpan.appendChild(newImage);
           }
           else {
             document.removeChild(newImage);
