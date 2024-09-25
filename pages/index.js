@@ -53,7 +53,7 @@ export default function Home() {
       <form onSubmit={handleSubmit}>
         <p>Entrez le mot de passe</p>
         <input
-          type="text"
+          type="password"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Entrez une valeur"

@@ -9,13 +9,40 @@ const MonComposant = ({ content }) => {
 
 const Home = ({ content }) => {
   useEffect(() => {
+    // Fonction pour mettre à jour la section quand le hash change
+    const updateContentBasedOnHash = () => {
       const hashe = window.location.hash;
-      const sectionToEdit = document.getElementById("titreComposant");
+      const titreToEdit = document.getElementById("titreComposant");
+      const corpsToEdit = document.getElementById("corps");
+      const sectionToAppendChild = document.getElementById("section");
 
-      if (sectionToEdit) {
-          sectionToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
+      if (titreToEdit) {
+        titreToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
+          
+          if (hashe === "#Volets") {
+            corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets demain ?";
+            const newInput = document.createElement('input');
+            newInput.type = "time"
+            sectionToAppendChild.appendChild(newInput);
+          }
+          if (hashe === "#Aspiro"){
+            const imageSpan = document.getElementById("picture");
+            imageSpan.innerText = '<img src="images/aspiro.jpg" alt="" />'
+          }
       }
-  }, [content]); // Dépendance à content pour s'assurer que l'effet s'exécute après le rendu
+    };
+
+    // Appelle une première fois pour gérer le hash initial au chargement de la page
+    updateContentBasedOnHash();
+
+    // Écoute les changements du hash et appelle la fonction à chaque changement
+    window.addEventListener('hashchange', updateContentBasedOnHash);
+
+    // Nettoyage de l'événement pour éviter des fuites de mémoire
+    return () => {
+      window.removeEventListener('hashchange', updateContentBasedOnHash);
+    };
+  }, [content]); // Le hook se déclenche si "content" change, mais il réagit aussi aux changements de hash
 
   return (
       <div>
@@ -23,6 +50,7 @@ const Home = ({ content }) => {
       </div>
   );
 };
+
 
 export default function ProtectedPage() {
   const [authorized, setAuthorized] = useState(false);
