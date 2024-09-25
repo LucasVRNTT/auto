@@ -8,19 +8,17 @@ const MonComposant = ({ content }) => {
 };
 
 const Home = ({ content }) => {
-  const sectionRef = useRef(null);
-
   useEffect(() => {
       const hashe = window.location.hash;
-      const sectionToEdit = sectionRef.current;
+      const sectionToEdit = document.getElementById("titreComposant");
 
       if (sectionToEdit) {
-          sectionToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' de l'ID
+          sectionToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
       }
-  }, []); // Exécute l'effet une seule fois après le premier rendu
+  }, [content]); // Dépendance à content pour s'assurer que l'effet s'exécute après le rendu
 
   return (
-      <div ref={sectionRef}>
+      <div>
           <MonComposant content={content} />
       </div>
   );
