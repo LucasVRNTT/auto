@@ -29,6 +29,7 @@ const Home = ({ content }) => {
             sectionToAppendChild.appendChild(newInput);
           }
           else {
+            sectionToAppendChild.appendChild(newInput);
             sectionToAppendChild.removeChild(newInput);
           }
           if (hashe === "#Aspiro"){
@@ -36,6 +37,7 @@ const Home = ({ content }) => {
             imageSpan.appendChild(newImage)
           }
           else {
+            imageSpan.appendChild(newImage)
             imageSpan.removeChild(newImage);
           }
       }
