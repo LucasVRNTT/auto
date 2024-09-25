@@ -15,19 +15,28 @@ const Home = ({ content }) => {
       const titreToEdit = document.getElementById("titreComposant");
       const corpsToEdit = document.getElementById("corps");
       const sectionToAppendChild = document.getElementById("section");
+      const newInput = document.createElement('input');
+      const newImage = document.createElement('img');
+      const imageSpan = document.getElementById("picture");
 
       if (titreToEdit) {
         titreToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
           
           if (hashe === "#Volets") {
             corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets demain ?";
-            const newInput = document.createElement('input');
+            
             newInput.type = "time"
             sectionToAppendChild.appendChild(newInput);
           }
+          else {
+            sectionToAppendChild.removeChild(newInput);
+          }
           if (hashe === "#Aspiro"){
-            const imageSpan = document.getElementById("picture");
-            imageSpan.innerText = '<img src="images/aspiro.jpg" alt="" />'
+            newImage.src = "images/aspiro.jpg"
+            imageSpan.appendChild(newImage)
+          }
+          else {
+            imageSpan.removeChild(newImage);
           }
       }
     };
