@@ -26,12 +26,21 @@ module.exports = {
         },
       ];
     },
-    webpack5: true,
-    webpack: (config) => {
-      config.resolve.fallback = { 
-        fs: false,
-        path: false };
-
+    async rewrites() {
+      return [
+        {
+          source: '/api/:path*',
+          destination: 'https://api.external-service.com/:path*', // Réécritures d'URL pour les API externes
+        },
+      ]
+    },
+    webpack: (config, { isServer }) => {
+      // Modifications du comportement du Webpack
+      if (!isServer) {
+        config.resolve.fallback = {
+          fs: false, // Désactive l'utilisation de fs côté client
+        };
+      }
       return config;
     },
   };
