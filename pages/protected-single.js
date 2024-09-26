@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef  } from 'react';
 import { useRouter } from 'next/router';
+import fs from 'fs';
+import path from 'path';
 let elementsAjoutes = [];
 
 const MonComposant = ({ content }) => {
