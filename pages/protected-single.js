@@ -28,7 +28,7 @@ const Home = ({ content }) => {
       const sectionToAppendChild = document.getElementById("section");
       const imageSpan = document.getElementById("picture");
       const filePath = path.resolve(process.cwd(), 'data/'+hashe.slice(1)+'.txt');
-      const storedValue = fs.readFileSync(filePath, 'utf-8').trim();
+      const storedValue = fs.readFile(filePath, 'utf-8').trim();
 
       if (titreToEdit) {
         // Ajoute le titre de la page
@@ -43,7 +43,7 @@ const Home = ({ content }) => {
             hourInput.type = "time";
             hourInput.onblur=sauverHeure(hourInput.value)
             const heureFilePath = path.resolve(process.cwd(), 'data/heureLever.txt');
-            const storedHeureValue = fs.readFileSync(filePath, 'utf-8').trim();
+            const storedHeureValue = fs.readFile(filePath, 'utf-8').trim();
             hourInput.value = storedHeureValue
             sectionToAppendChild.appendChild(hourInput);
             elementsAjoutes.push(hourInput);
