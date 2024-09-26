@@ -10,6 +10,8 @@ const MonComposant = ({ content }) => {
   );
 };
 
+
+
 function sauverHeure(contenu){
   const heureFilePath = path.resolve(process.cwd(), 'data/heureLever.txt');
   fs.writeFile(heureFilePath, contenu, (err) => {
@@ -28,7 +30,13 @@ const Home = ({ content }) => {
       const sectionToAppendChild = document.getElementById("section");
       const imageSpan = document.getElementById("picture");
       const filePath = path.resolve(process.cwd(), 'data/'+hashe.slice(1)+'.txt');
-      const storedValue = fs.readFile(filePath, 'utf-8').trim();
+      fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+        console.error(err);
+        } else {
+        console.log(data);
+        }
+        });
 
       if (titreToEdit) {
         // Ajoute le titre de la page
@@ -43,8 +51,13 @@ const Home = ({ content }) => {
             hourInput.type = "time";
             hourInput.onblur=sauverHeure(hourInput.value)
             const heureFilePath = path.resolve(process.cwd(), 'data/heureLever.txt');
-            const storedHeureValue = fs.readFile(filePath, 'utf-8').trim();
-            hourInput.value = storedHeureValue
+            fs.readFile(filePath, 'utf8', (err, data) => {
+              if (err) {
+              console.error(err);
+              } else {
+                hourInput.value = data;
+              }
+              });
             sectionToAppendChild.appendChild(hourInput);
             elementsAjoutes.push(hourInput);
           }
