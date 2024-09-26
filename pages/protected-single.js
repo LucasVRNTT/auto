@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef  } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 const fs = require('fs');
 import path from 'path';
