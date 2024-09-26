@@ -18,12 +18,11 @@ const Home = ({ content }) => {
       const sectionToAppendChild = document.getElementById("section");
       const imageSpan = document.getElementById("picture");
       
-
       if (titreToEdit) {
         titreToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
         elementsAjoutes.forEach((element) => element.remove());
           if (hashe === "#Volets") {
-            corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets demain ?";
+            corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets de la chambre demain ?";
             const hourInput = document.createElement('input');
             hourInput.id = "hourInput"
             
