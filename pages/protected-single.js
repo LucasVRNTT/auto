@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef  } from 'react';
 import { useRouter } from 'next/router';
-import * as fs from 'fs';
+const fs = require('fs');
 import path from 'path';
 let elementsAjoutes = [];
 
