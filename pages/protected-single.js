@@ -8,6 +8,14 @@ const MonComposant = ({ content }) => {
   );
 };
 
+function sauverHeure(contenu){
+  const heureFilePath = path.resolve(process.cwd(), 'data/heureLever.txt');
+  fs.writeFile(heureFilePath, contenu, (err) => {
+    if (err) throw err;
+    console.log('Le fichier a été créé avec succès !');
+  });
+}
+
 const Home = ({ content }) => {
   useEffect(() => {
     // Fonction pour mettre à jour la section quand le hash change
@@ -17,16 +25,24 @@ const Home = ({ content }) => {
       const corpsToEdit = document.getElementById("corps");
       const sectionToAppendChild = document.getElementById("section");
       const imageSpan = document.getElementById("picture");
-      
+      const filePath = path.resolve(process.cwd(), 'data/'+hashe.slice(1)+'.txt');
+      const storedValue = fs.readFileSync(filePath, 'utf-8').trim();
+
       if (titreToEdit) {
+        // Ajoute le titre de la page
         titreToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
+        // Réintialise le contenu précédemment ajouté
         elementsAjoutes.forEach((element) => element.remove());
+
           if (hashe === "#Volets") {
-            corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets de la chambre demain ?";
+            corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets de la chambre demain matin ?";
             const hourInput = document.createElement('input');
             hourInput.id = "hourInput"
-            
             hourInput.type = "time";
+            hourInput.onblur=sauverHeure(hourInput.value)
+            const heureFilePath = path.resolve(process.cwd(), 'data/heureLever.txt');
+            const storedHeureValue = fs.readFileSync(filePath, 'utf-8').trim();
+            hourInput.value = storedHeureValue
             sectionToAppendChild.appendChild(hourInput);
             elementsAjoutes.push(hourInput);
           }
