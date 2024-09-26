@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef  } from 'react';
 import { useRouter } from 'next/router';
+let elementsAjoutes = [];
 
 const MonComposant = ({ content }) => {
   return (
@@ -16,10 +17,11 @@ const Home = ({ content }) => {
       const corpsToEdit = document.getElementById("corps");
       const sectionToAppendChild = document.getElementById("section");
       const imageSpan = document.getElementById("picture");
+      
 
       if (titreToEdit) {
         titreToEdit.innerText = hashe ? hashe.slice(1) : "Nothing"; // Supprime le '#' du hash
-          
+        elementsAjoutes.forEach((element) => element.remove());
           if (hashe === "#Volets") {
             corpsToEdit.innerText = "Contenu ajouté pour Volets\nA quelle heure ouvrir les volets demain ?";
             const hourInput = document.createElement('input');
@@ -27,27 +29,16 @@ const Home = ({ content }) => {
             
             hourInput.type = "time";
             sectionToAppendChild.appendChild(hourInput);
-          }
-          else {
-            try{
-            // document.removeChild(hourInput);
-              hourInput.remove();
-            }
-            finally{}
+            elementsAjoutes.push(hourInput);
           }
           if (hashe === "#Aspiro"){
             const newImage = document.createElement('img');
             newImage.id = "image"
             newImage.src = "images/aspiro.jpg";
             imageSpan.appendChild(newImage);
+            elementsAjoutes.push(newImage);
           }
-          else {
-            try{
-            // document.removeChild(hourInput);
-            newImage.remove();
-            }
-            finally{}
-          }
+          
       }
     };
 
