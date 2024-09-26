@@ -18,7 +18,7 @@ function sauverHeure(contenu){
   });
 }
 const readFile = async (filePath) => {
-  return await filePath.text();
+  return await filePath;
 }
 const Home = ({ content }) => {
   useEffect(() => {
@@ -30,7 +30,7 @@ const Home = ({ content }) => {
       const sectionToAppendChild = document.getElementById("section");
       const imageSpan = document.getElementById("picture");
       const filePath = path.resolve(process.cwd(), 'data/'+hashe.slice(1)+'.txt');
-      console.log(readFile(filePath))
+      console.log(filePath.textContent)
 
       if (titreToEdit) {
         // Ajoute le titre de la page
@@ -45,7 +45,7 @@ const Home = ({ content }) => {
             hourInput.type = "time";
             hourInput.onblur=sauverHeure(hourInput.value)
             const heureFilePath = path.resolve(process.cwd(), 'data/heureLever.txt');
-            hourInput.value = readFile(heureFilePath);
+            hourInput.value = heureFilePath.textContent;
             sectionToAppendChild.appendChild(hourInput);
             elementsAjoutes.push(hourInput);
           }
